@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>YOUR USERNAME - Task 1</title>
+    <title>UDONELS - Task 1</title>
     <style>
       .block {
         background-color: gainsboro;
@@ -11,13 +11,13 @@
     </style>
   </head>
   <body>
-    <h1>YOUR USERNAME - Task 1</h1>
+    <h1>UDONELS - Task 1</h1>
     <h2>My code:</h2>
     <p id="code" class="block"></p>
     <h2>Results of my code:</h2>
     <p id="results" class="block"></p>
     <script id="task_id" type="text/javascript" defer>
-    {# UDONELS #}
+      //{# UDONELS #}
       let data = [
         {
           page_id: 6682420,
@@ -81,38 +81,26 @@
         },
       ];
 
-      {# YOUR CODE HERE #}
-      document.addEventListener("DOMContentLoaded", () => {
-        let rawScript = document.getElementById("task_id").textContent;
-        let data;
-        try {
-          // Extract only data variable
-          const fn = new Function(`${rawScript}; return data;`);
-          data = fn();
-        } catch (e) {
-          console.error("Failed to extract data:", e);
-        }
+      //{# YOUR CODE HERE #}
+      try {
+        // Format each entry
+        let results = data.map((entry) => {
+          let date = new Date(entry.creation_date);
+          let options = { year: "numeric", month: "long", day: "numeric" };
+          let formattedDate = date.toLocaleDateString("en-US", options);
+          return `Article "${entry.title}" (Page ID ${entry.page_id}) was created at ${formattedDate}.`;
+        });
 
-        if (data) {
-          // Format each entry
-          let results = data.map((entry) => {
-            let date = new Date(entry.creation_date);
-            let options = { year: "numeric", month: "long", day: "numeric" };
-            let formattedDate = date.toLocaleDateString("en-US", options);
-            return `Article "${entry.title}" (Page ID ${entry.page_id}) was created at ${formattedDate}.`;
-          });
-
-          // Insert into #results block
-          document.getElementById("results").innerText = results.join("\n");
-        } else {
-          document.getElementById("results").innerText =
-            "Failed to extract data.";
-        }
-      });
+        // Insert into #results block
+        document.getElementById("results").innerText = results.join("\n");
+      } catch {
+        document.getElementById("results").innerText =
+          "Failed to extract data.";
+      }
     </script>
     <script>
-    document.getElementById("code").innerText =
-    document.getElementById("task_id").text;
+      document.getElementById("code").innerText =
+      document.getElementById("task_id").text;
     </script>
   </body>
 </html>
