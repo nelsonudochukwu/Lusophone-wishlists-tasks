@@ -1,28 +1,15 @@
-"""
 #UDONELS - Task 2
-This script reads a list of URLs from a CSV file (skipping the header),
-then sends HTTP GET requests to check their status codes asynchronously.
-
-Output format:
-(200) http://example.com
-(ERR) http://broken-link.com — ConnectionError
-
-Requires:
-- aiohttp
-- asyncio
-"""
 import asyncio
 import aiohttp
+import csv
 
 def load_urls(file_path):
     """Loads URLs from a text/CSV file, skipping the first line and keeping only valid http(s) URLs."""
-    with open(file_path, 'r', encoding='utf-8') as f:
-        lines = f.readlines()
-    # Skip the first line and validate others
-    urls = [
-        line.strip() for line in lines[1:]  # skip header
-        if line.startswith("http")  # keep only valid http(s) links
-    ]
+    urls = []
+    with open(file_path, 'r', encoding='utf-8') as file:
+        csv_reader = csv.reader(file)
+        next(csv_reader) # Skip the header
+        urls = [row[0] for row in csv_reader]
     return urls
 
 async def fetch_status(session, url):
