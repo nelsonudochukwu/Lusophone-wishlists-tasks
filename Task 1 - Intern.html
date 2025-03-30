@@ -80,27 +80,30 @@
           title: "Zezico Guajajara",
         },
       ];
-      
-      //{# YOUR CODE HERE #}
-      try {
-        // Format each entry
-        let results = data.map((entry) => {
-          let date = new Date(entry.creation_date);
-          let options = { year: "numeric", month: "long", day: "numeric" };
-          let formattedDate = date.toLocaleDateString("en-US", options);
-          return `Article "${entry.title}" (Page ID ${entry.page_id}) was created at ${formattedDate}.`;
-        });
 
-        // Insert into #results block
+      //{# YOUR CODE HERE #}
+      function formatDate(dateStr) {
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        return new Date(dateStr).toLocaleDateString("en-US", options);
+      }
+
+      try {
+        const results = data.map((entry) => {
+          return `Article "${entry.title}" (Page ID ${
+            entry.page_id
+          }) was created at ${formatDate(entry.creation_date)}.`;
+        });
+        // insert into result block
         document.getElementById("results").innerText = results.join("\n");
-      } catch {
+      } catch (error) {
         document.getElementById("results").innerText =
           "Failed to extract data.";
+        console.error("Error processing data:", error);
       }
     </script>
     <script>
       document.getElementById("code").innerText =
-      document.getElementById("task_id").text;
+        document.getElementById("task_id").text;
     </script>
   </body>
 </html>
