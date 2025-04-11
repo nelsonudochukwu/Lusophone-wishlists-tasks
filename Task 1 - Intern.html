@@ -86,20 +86,19 @@
         const options = { year: "numeric", month: "long", day: "numeric" };
         return new Date(dateStr).toLocaleDateString("en-US", options);
       }
-
-      try {
-        const results = data.map((entry) => {
-          return `Article "${entry.title}" (Page ID ${
-            entry.page_id
-          }) was created at ${formatDate(entry.creation_date)}.`;
-        });
-        // insert into result block
-        document.getElementById("results").innerText = results.join("\n");
-      } catch (error) {
-        document.getElementById("results").innerText =
-          "Failed to extract data.";
-        console.error("Error processing data:", error);
-      }
+  
+      const results = data.map((entry) => {
+        return `Article "${entry.title}" (Page ID ${
+          entry.page_id
+        }) was created at ${formatDate(entry.creation_date)}.`;
+      });
+      // insert into result block
+      document.getElementById("results").innerText = results.join("\n");
+    
+      document.getElementById("results").innerText =
+        "Failed to extract data.";
+      console.error("Error processing data:", error);
+      
     </script>
     <script>
       document.getElementById("code").innerText =
