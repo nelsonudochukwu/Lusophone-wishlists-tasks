@@ -4,22 +4,19 @@
 
 Create a JavaScript script to manipulate a json object and print it in a human legible format.
 
----
-
 ## My approach:
 
 - create a function ```formatDate()``` to transform the date into the required format eg January 12, 2018
 - transform each object in the provided input data into a formatted string containing its title, page ID, and creation date and store in a ```results``` array.
 - get the *results* element in which the data will be displayed
 - assign the content of the *results* element to the ```results``` array (with its contents separated by a newline.)
-
+  
+---
 
 # Addressing the Lusophone Technological Wishlist Proposals – Task 2
 
 ## Objective of the task
 Create a Python script that reads a list of URLs from a CSV file, then fetches and prints the HTTP status code for each URL.
-
----
 
 ## My approach
 
